@@ -14,7 +14,7 @@ def create_app():
     jwt = JWTManager(app)
     from flask_cors import CORS
     origin = os.getenv('LINK_DEPLOY_FRONT')
-    CORS(app, origins=[origin])
+    CORS(app, origins='*')
     
     app.register_blueprint(bp_employee)
     app.register_blueprint(bp_refund)
