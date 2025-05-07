@@ -6,12 +6,15 @@ from flask_migrate import Migrate
 from config import Config
 import os
 from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)
     jwt = JWTManager(app)
     from flask_cors import CORS
-    CORS(app, origins='*')
+    origin = os.getenv('LINK_DEPLOY_FRONT')
+    CORS(app, origins=[origin])
     
     app.register_blueprint(bp_employee)
     app.register_blueprint(bp_refund)
